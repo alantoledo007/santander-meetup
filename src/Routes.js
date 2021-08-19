@@ -4,6 +4,7 @@ import Meetups from "src/pages/Meetups";
 import { ROUTER_PATHS } from "src/core/constants";
 import Error404 from "src/pages/Error404";
 import useUser from "src/hooks/useUser";
+import Loader from "./components/shared/Loader";
 
 export default function Routes() {
   const user = useUser();
@@ -11,7 +12,7 @@ export default function Routes() {
   return (
     <>
       {user.isUnknow() ? (
-        <p>cargando...</p>
+        <Loader />
       ) : (
         <>
           <Switch>
