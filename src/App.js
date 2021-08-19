@@ -2,6 +2,7 @@ import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import moment from "moment";
 import Routes from "src/Routes";
 import theme from "src/styles/theme";
+import "src/firebase";
 
 moment.locale("es");
 

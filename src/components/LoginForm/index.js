@@ -3,7 +3,6 @@ import Title from "src/components/shared/Title";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./schema";
-import { useHistory } from "react-router-dom";
 
 export default function LoginForm({ login }) {
   const {
@@ -12,8 +11,6 @@ export default function LoginForm({ login }) {
     formState: { errors, isSubmitting },
     reset,
   } = useForm({ resolver: yupResolver(schema) });
-
-  const history = useHistory();
 
   const onSubmit = async (data) => {
     await login(data.email, data.password);

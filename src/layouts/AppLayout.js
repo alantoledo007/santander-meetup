@@ -1,5 +1,5 @@
 import Header from "src/components/Header";
-import { Container, CssBaseline } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 export default function AppLayout({ children }) {
   return (
