@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core";
+import { unstable_createMuiStrictModeTheme as createTheme } from "@material-ui/core";
 
 export const colors = {
   primary: "#E90000",

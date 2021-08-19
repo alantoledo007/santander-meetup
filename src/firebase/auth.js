@@ -17,6 +17,8 @@ export const onAuthStateChange = (handler) => {
   });
 };
 
+export const logout = () => firebase.auth().signOut();
+
 export const loginWithEmailAndPassword = (email, password) => {
   return firebase.auth().signInWithEmailAndPassword(email, password);
 };
