@@ -63,7 +63,11 @@ export default function Header({ logout }) {
               </>
             )}
             <Box mx="auto">
-              {!loggedIn && <span>Santander Meetup</span>}
+              {!loggedIn && (
+                <Button color={"inherit"} to={"/"} component={RouterLink}>
+                  Santander Meetup
+                </Button>
+              )}
               <Hidden smDown>
                 {headerData(loggedIn, user.data.isAdmin).map(
                   ({ label, href }) => (
@@ -77,9 +81,11 @@ export default function Header({ logout }) {
                     </Button>
                   )
                 )}
-                <Button color={"inherit"} onClick={onLogout}>
-                  Salir
-                </Button>
+                {loggedIn && (
+                  <Button color={"inherit"} onClick={onLogout}>
+                    Salir
+                  </Button>
+                )}
               </Hidden>
             </Box>
           </Toolbar>
