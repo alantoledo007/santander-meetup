@@ -13,3 +13,7 @@ export const DOC_STATES = {
   NOT_EXISTS: null,
   LOADING: undefined,
 };
+
+export const ADMIN_STATES = {
+  NOT_KNOW: undefined,
+};

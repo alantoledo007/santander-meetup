@@ -6,9 +6,10 @@ export default function AppLayout({ children }) {
   const handleLogout = () => {
     logout();
   };
+
   return (
     <>
-      <Header auth isAdmin current={"home"} logout={handleLogout} />
+      <Header current={"home"} logout={handleLogout} />
       <Container component="main" maxWidth="md">
         {children}
       </Container>

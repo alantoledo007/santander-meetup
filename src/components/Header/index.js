@@ -65,16 +65,18 @@ export default function Header({ logout }) {
             <Box mx="auto">
               {!loggedIn && <span>Santander Meetup</span>}
               <Hidden smDown>
-                {headerData(loggedIn, false).map(({ label, href }) => (
-                  <Button
-                    key={label}
-                    color={"inherit"}
-                    to={href}
-                    component={RouterLink}
-                  >
-                    {label}
-                  </Button>
-                ))}
+                {headerData(loggedIn, user.data.isAdmin).map(
+                  ({ label, href }) => (
+                    <Button
+                      key={label}
+                      color={"inherit"}
+                      to={href}
+                      component={RouterLink}
+                    >
+                      {label}
+                    </Button>
+                  )
+                )}
                 <Button color={"inherit"} onClick={onLogout}>
                   Salir
                 </Button>
@@ -88,7 +90,7 @@ export default function Header({ logout }) {
           onClose={() => setShowDrawer(false)}
         >
           <List>
-            {headerData(loggedIn, false).map(({ label, href }) => (
+            {headerData(loggedIn, user.data.isAdmin).map(({ label, href }) => (
               <ListItem key={label} button component={RouterLink} to={href}>
                 <ListItemText>{label}</ListItemText>
               </ListItem>
