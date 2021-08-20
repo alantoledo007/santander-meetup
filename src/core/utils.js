@@ -22,6 +22,8 @@ export const createDocObject = (doc) => {
 export const getErrorMessage = (code) => {
   const messages = {
     "permission-denied": "No tienes permisos suficientes",
+    "resource-exhausted":
+      "Accesos denegado temporalmente por comportamientos sospechosos.",
   };
 
   return (
