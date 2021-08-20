@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import RecordNotFound from "src/components/shared/RecordNotFound";
 import SuccessAnimation from "src/components/shared/SuccessAnimation";
 import useError from "src/hooks/useError";
+import ErrorAlert from "src/components/shared/ErrorAlert";
 
 export default function Meetup() {
   const [meetup, setMeetup] = useState(DOC_STATES.LOADING);
@@ -22,6 +23,7 @@ export default function Meetup() {
 
   useEffect(() => {
     const unsubscriber = getMeetup(id, setMeetup, (error) => {
+      catchError(error);
       setMeetup(null);
     });
     return () => {
@@ -74,6 +76,11 @@ export default function Meetup() {
           onRegistering={handleRegistration(meetup)}
         />
       )}
+      <ErrorAlert
+        open={error !== false}
+        message={error}
+        onClose={onErrorClose}
+      />
     </AppLayout>
   );
 }
