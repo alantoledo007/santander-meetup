@@ -8,3 +8,8 @@ export const USER_STATES = {
 };
 
 export const MEETUPS_LOADING = null;
+
+export const DOC_STATES = {
+  NOT_EXISTS: null,
+  LOADING: undefined,
+};
