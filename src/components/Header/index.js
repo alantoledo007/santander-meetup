@@ -26,10 +26,6 @@ const headerData = (auth, isAdmin) => {
         label: "Meetups",
         href: "/meetups",
       },
-      {
-        label: "Mis inscripciones",
-        href: "/mis-inscripciones",
-      },
     ]);
   }
   return data;
@@ -79,6 +75,9 @@ export default function Header({ logout }) {
                     {label}
                   </Button>
                 ))}
+                <Button color={"inherit"} onClick={onLogout}>
+                  Salir
+                </Button>
               </Hidden>
             </Box>
           </Toolbar>
