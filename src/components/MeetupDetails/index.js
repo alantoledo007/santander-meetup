@@ -43,7 +43,9 @@ export default function MeetupDetails({ meetup, onRegistering }) {
                 color="primary"
                 onClick={handleRegistration}
               >
-                {meetup.registered ? "Cancelar" : "Confirmar"} asistencia
+                {meetup.registered
+                  ? "Cancelar inscripcióm"
+                  : "Confirmar asistencia"}
               </Button>
               <Typography variant="body2" color="textSecondary">
                 Al presionar el botón te inscribiras a la meetup

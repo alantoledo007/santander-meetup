@@ -1,5 +1,6 @@
 import { Grid } from "@material-ui/core";
-import MeetupCard from "../MeetupCard";
+import MeetupCard from "src/components/MeetupCard";
+import NoRecords from "src/components/shared/NoRecords";
 
 export default function MeetupList({ meetups }) {
   return (
@@ -11,7 +12,7 @@ export default function MeetupList({ meetups }) {
           ))}
         </Grid>
       ) : (
-        <div>No hay meetups</div>
+        <NoRecords message="Lo sentimos, no hay meetups disponibles." />
       )}
     </>
   );

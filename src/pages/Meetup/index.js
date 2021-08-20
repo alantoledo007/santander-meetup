@@ -11,15 +11,19 @@ import Spinner from "src/components/shared/Spinner";
 import { useParams } from "react-router-dom";
 import RecordNotFound from "src/components/shared/RecordNotFound";
 import SuccessAnimation from "src/components/shared/SuccessAnimation";
+import useError from "src/hooks/useError";
 
 export default function Meetup() {
-  const [meetup, setMeetup] = useState(DOC_STATES.LOADING); //null = loading, array = data/no-data
+  const [meetup, setMeetup] = useState(DOC_STATES.LOADING);
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const { error, catchError, onErrorClose } = useError();
 
   useEffect(() => {
-    const unsubscriber = getMeetup(id, setMeetup);
+    const unsubscriber = getMeetup(id, setMeetup, (error) => {
+      setMeetup(null);
+    });
     return () => {
       unsubscriber();
     };
