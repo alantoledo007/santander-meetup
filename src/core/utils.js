@@ -18,3 +18,13 @@ export const createDocObject = (doc) => {
     ...doc.data(),
   };
 };
+
+export const getErrorMessage = (code) => {
+  const messages = {
+    "permission-denied": "No tienes permisos suficientes",
+  };
+
+  return (
+    messages[code] || "Ocurrió un error y estamos trabajando en su solución"
+  );
+};

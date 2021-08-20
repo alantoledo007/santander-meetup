@@ -35,11 +35,11 @@ export default function Header({ logout }) {
   const user = useUser();
   const [showDrawer, setShowDrawer] = useState(false);
   const loggedIn = user.isAuthenticated();
-  if (user.isUnknow()) return null;
   const onLogout = () => {
     setShowDrawer(false);
     logout();
   };
+  if (user.isUnknow()) return null;
   return (
     <header>
       <Box mb={3}>
