@@ -17,7 +17,7 @@ export default function useUser() {
   return {
     data: { ...user, isAdmin },
     isAuthenticated: () =>
-      user && user.uid && isAdmin !== ADMIN_STATES.NOT_KNOW,
+      user && user.uid && isAdmin !== ADMIN_STATES.NOT_LOGGED,
     isUnknow: () =>
       user === USER_STATES.NOT_KNOW || isAdmin === ADMIN_STATES.NOT_KNOW,
   };

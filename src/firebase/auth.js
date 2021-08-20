@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import { setIsAdmin } from "src/redux/slices/app.slice";
 import store from "src/redux/store";
 import { getUser } from "src/firebase/users";
-import { USER_STATES } from "src/core/constants";
+import { ADMIN_STATES, USER_STATES } from "src/core/constants";
 
 const mapUserFromFirebaseAuth = (user) => {
   return {
@@ -46,15 +46,20 @@ export const registerWithEmailAndPassword = (email, password, fullname) => {
 };
 
 export const isAdminHandler = (user) => {
-  if (user !== USER_STATES.NOT_KNOW && user !== USER_STATES.NOT_LOGGED) {
-    getUser(user.uid).then((doc) => {
-      let isAdmin = false;
-      if (doc?.exists) {
-        isAdmin = doc.data().isAdmin;
-      }
-      store.dispatch(setIsAdmin(isAdmin));
-    });
-  } else {
-    store.dispatch(setIsAdmin(false));
+  if (user === USER_STATES.NOT_LOGGED) {
+    store.dispatch(setIsAdmin(ADMIN_STATES.NOT_LOGGED));
+    return;
   }
+  if (user === USER_STATES.NOT_KNOW) {
+    store.dispatch(setIsAdmin(ADMIN_STATES.NOT_KNOW));
+    return;
+  }
+
+  getUser(user.uid).then((doc) => {
+    let isAdmin = false;
+    if (doc?.exists) {
+      isAdmin = doc.data().isAdmin;
+    }
+    store.dispatch(setIsAdmin(isAdmin));
+  });
 };

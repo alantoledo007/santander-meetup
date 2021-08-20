@@ -16,4 +16,5 @@ export const DOC_STATES = {
 
 export const ADMIN_STATES = {
   NOT_KNOW: undefined,
+  NOT_LOGGED: null,
 };
