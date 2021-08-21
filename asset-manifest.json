@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/santander-meetup/static/js/main.cc039497.chunk.js",
-    "main.js.map": "/santander-meetup/static/js/main.cc039497.chunk.js.map",
+    "main.js": "/santander-meetup/static/js/main.49116651.chunk.js",
+    "main.js.map": "/santander-meetup/static/js/main.49116651.chunk.js.map",
     "runtime-main.js": "/santander-meetup/static/js/runtime-main.cf405b1d.js",
     "runtime-main.js.map": "/santander-meetup/static/js/runtime-main.cf405b1d.js.map",
     "static/js/2.ff1513ec.chunk.js": "/santander-meetup/static/js/2.ff1513ec.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.cf405b1d.js",
     "static/js/2.ff1513ec.chunk.js",
-    "static/js/main.cc039497.chunk.js"
+    "static/js/main.49116651.chunk.js"
   ]
 }
