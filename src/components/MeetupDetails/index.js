@@ -16,7 +16,11 @@ export default function MeetupDetails({ meetup, onRegistering }) {
   return (
     <>
       {!meetup.registered && (
-        <Typography variant="subtitle1" color="secondary">
+        <Typography
+          aria-label="Fecha límite"
+          variant="subtitle1"
+          color="secondary"
+        >
           Tienes hasta el {getDate(1)} para decidirte
         </Typography>
       )}
@@ -47,9 +51,11 @@ export default function MeetupDetails({ meetup, onRegistering }) {
                   ? "Cancelar inscripción"
                   : "Confirmar asistencia"}
               </Button>
-              <Typography variant="body2" color="textSecondary">
-                Al presionar el botón te inscribiras a la meetup
-              </Typography>
+              {!meetup.registered && (
+                <Typography variant="body2" color="textSecondary">
+                  Al presionar el botón te inscribiras a la meetup
+                </Typography>
+              )}
             </Grid>
           </Grid>
         </CardContent>
