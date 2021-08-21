@@ -13,7 +13,7 @@ export default function LoginForm({ login }) {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    await login(data.email, data.password);
+    login(data.email, data.password);
     reset();
   };
   return (
