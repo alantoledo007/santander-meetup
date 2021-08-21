@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import moment from "moment";
 import { createDocObject } from "src/core/utils";
 
 const collection = "meetups";
@@ -82,4 +83,32 @@ export const meetupUnregister = (id) => {
       }
     });
   });
+};
+
+export const meetupEdit = (id, data) => {
+  const ref = firebase.firestore().collection(collection).doc(id);
+  return firebase.firestore().runTransaction((transaction) => {
+    return transaction.get(ref).then((doc) => {
+      if (doc?.exists) {
+        transaction.update(ref, {
+          ...data,
+          datetime: moment(data.datetime).format("DD/MM/YYYY HH:mm"),
+        });
+      }
+    });
+  });
+};
+
+export const meetupDelete = (id) => {
+  return firebase.firestore().collection(collection).doc(id).delete();
+};
+
+export const meetupCreate = (data) => {
+  return firebase
+    .firestore()
+    .collection(collection)
+    .add({
+      ...data,
+      datetime: moment(data.datetime).format("DD/MM/YYYY HH:mm"),
+    });
 };

@@ -24,7 +24,7 @@ export default function MeetupCard({ meetup }) {
         </CardContent>
         <CardActions>
           <Button
-            to={`${ROUTER_PATHS.meetups}/${meetup.id}`}
+            to={ROUTER_PATHS.meetup_details.replace(":id", meetup.id)}
             component={Link}
             size="large"
             fullWidth

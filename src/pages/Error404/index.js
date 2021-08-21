@@ -3,20 +3,32 @@ import Lottie from "react-lottie";
 import lottieJson from "src/assets/page404.json";
 import { Box, Button, Typography } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
+import { ROUTER_PATHS } from "src/core/constants";
 
-export default function Error404() {
+export default function Error404({ isAdmin }) {
   return (
     <Wrapper>
       <Container>
         <Box mb={3}>
           <Typography variant="h3">Santander Meetup</Typography>
         </Box>
-        <Button component={RouterLink} to="/" variant="outlined">
-          Ir al inicio
+        <Button
+          component={RouterLink}
+          to={isAdmin ? ROUTER_PATHS.admin_meetups : "/"}
+          variant="outlined"
+        >
+          {isAdmin ? "Ir al panel" : "Ir al inicio"}
         </Button>
         <Lottie
           options={{ loop: true, autoplay: true, animationData: lottieJson }}
         />
+        <Typography
+          variant="subtitle1"
+          component="strong"
+          color="textSecondary"
+        >
+          Página no encontrada
+        </Typography>
       </Container>
     </Wrapper>
   );
