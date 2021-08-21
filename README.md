@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# CHALLENGE: Santander Meetup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+deploy: http://alantoledo007.github.io/santander-meetup
 
-## Available Scripts
+### Usuarios de prueba
 
-In the project directory, you can run:
+- admin (dev/prod): `admin@test.com`, `Test1234`
+- user (dev/prod): `alantoledo.work@gmail.com`, `Test1234`
 
-### `yarn start`
+## Desarrollo (Local)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. `yarn`
+2. `yarn start`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+La aplicación estará abierta en desarrollo: [http://localhost:3000](http://localhost:3000)
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ejecutá los tests. Si los test no corren probablemente está a la espera del `Watch Usage`. Si es así, con presionar la tecla `a` es suficiente.
 
-### `yarn build`
+## Información de la aplicación
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `Backend`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+El backend está resuelto a través de firebase, actualmente existen 2 configuraciones. Una para dev y otra para prod. Tal configuración se puede encontrar en `src/firebase/config`. Son de acceso publico, por tanto es prácticamente inutil utilizar variables de entorno para esta información.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Desde el mismo firebase se gestionan los usuarios y Meetups.
 
-### `yarn eject`
+### `Frontend`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+El frontend es una `PWA` creada `React` bajo la configuración de `create-react-app`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+La misma se conecta con firebase y los recursos están conectados en `real-time`, es decir que, cuando un usuario realiza una opreación de escritura, todos los usuarios conectados verán estos cambios de forma instantanea.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Además, se conecta con `AppWeather` para consumir los datos meteorológicos necesarios para cumplir con el objetivo de la app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Features
 
-## Learn More
+- Como usuario me puedo autenticar en la app.
+- Como usuario y administrador puede ver las meetups disponibles.
+- Como usuario y administrador puede inscribirme en las meetups que quiera.
+- Como administrador puede gestionar las meetups (crear, listar, borrar, modificar),
+- Como administrador, en base a la temperatura del dia de la fecha de la meetup y la cantidad de personas inscriptas, puedo saber cuantas cajas de birras puedo compar.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## todo
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Notificar a usuarios y administradores el estado de las meetups.
+- Como administrador, poder cancelar meetups.
 
-### Code Splitting
+## Reglas de oro
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Los usuarios tienen tiempo de registrarse hasta 24hs antes de la meetups. Permitiendo a los organizadores tener un margen de tiempo para comprar las birras necesarias.
 
-### Analyzing the Bundle Size
+# Stack tecnológico
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- ReactJs
+- firebase
+- StyledComponens
+- Redux Toolkix
+- MaterialUI
+- React-Hook-Form
+- Axios
+- React-Router-Dom
+- React-Testing-Library
+- Jest
+- Lottie Animations Json
+- Yup
+- También está installado Cypress, pero no llegue a utilizarlo.
 
-### Making a Progressive Web App
+# Detalles técnicos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- .env: Entiendo que el .env debe estar oculo, pero partiendo que es un chalenge, por cuestiones de practicidad decidi exponer el API_KEY de AppWeather para facilitar la prueba de la app.
 
-### Advanced Configuration
+- Constantes: El projeto cuenta con variables de carácter gobal permitiendo controlar de forma masiva la aplicación y estandarisar valores, como rutas, nomenclaturas, etc.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- RetryStrategy: Los solicitudes HTTP direccionadas a `AppWeather` tiene una lógica de reintentos recursiva. Actualmente configurada en un máximo de 3 reintentos, pero esto se puede modificar conforme se necesite. Ya que la función permite escalarlo (`src/core/utils -> GETrequestWithRetries()`)
 
-### Deployment
+- Temperatura seleccionada: Las temeraturas no se eligen a la lijera, se seleccionan a través del siguiente criterio: (`src/utils -> getMaxTempCloserFromDatetimes()`)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  - La fecha de la temperatura debe corresponder a la fecha de la meetup.
+  - El horario de la temperatura debe ser el más cerano al del horario de la meetup. (horas antes u horas despues, lo más cercano).
+  - La temperatura selecionada es la máxima, por las dudas (para que nunca falten birras).
 
-### `yarn build` fails to minify
+- Actualización de la temperatura: Todos sabemos que las temperaturas pueden variar. Por eso mismo, dependiendo el estado de la Meetups, se determina si es necesario actualizarse o no.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - Si la meetup está cancelada. No tiene sentido actualizar la temperatura.
+  - Si la meetup no tiene participantes: Solo se actualiza una véz como precaución.
+  - Si la meetup es mayor a la fecha actual. Ya no pierde el sentido actualiarla.
+
+- Testings
+
+  - Utils: Todas las utils estan testeadas.
+  - Componentes: Parcial (no llegue con el tiempo y decidí testear mas que nada las utils porque muchos componentes dependen de ellas).
+
+- Error Handler:
+- En principio cree un hook para manejar los errores utilizando los componentes de MaterialUi. (`src/hooks/useError`)
+- Luego implementé una librería que facilitó incluso más las cosas.
+- Todos los errores son capturados por una util que se encarga, dependiendo el cédigo de error, retornar un mensage.
+
+- `useUser`: Este hook está conectado al estado de la sesión del usuario, permitiendo controtal cuando un usuario es admin, esta autenticado o aún no se sabe, asimismo, este hook permite acceder los datos del usuario autenticado.
+
+- Redux y StyledComponents:
+  Se podian solucionar con otras cosas menos pesadas y más sensillas. Pero me parece que está bueno demostrar coonocimiento sobre estas tecnologías. Ya que es dificil trabajar en una aplicación sesilla.
+
+# Detalles visuales.
+
+- Loader: El loader está ligado al estado el usuario. Cuando al app no conoce su estado, se mantiene esta animación. (cajon de cervesas).
+
+- Spinner: Cuando se realizá un fetch y/o la infromación no está lista para presentarsela al usuario, se muestra el spinner de un elefante rojo animado.
+
+- Cuando un usuario se inscribe a una meetup, se ejecuta una animación de 2 cervesas brindando (tiene una pequeña marca de agua, pero a mi parecer vale la pena).
+
+- Paginas de error 404 personalizadas con animaciones:
+  - Pagina no contrada.
+  - Recurso no econtrado.
