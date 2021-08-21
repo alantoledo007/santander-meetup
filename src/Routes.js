@@ -1,4 +1,4 @@
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import Login from "src/pages/Login";
 import Meetups from "src/pages/Meetups";
 import Meetup from "src/pages/Meetup";
@@ -27,7 +27,7 @@ export default function Routes() {
       {user.isUnknow() ? (
         <Loader />
       ) : (
-        <BrowserRouter
+        <HashRouter
           basename={
             process.env.NODE_ENV === "production" ? "/santander-meetup" : "/"
           }
@@ -80,7 +80,7 @@ export default function Routes() {
               <Error404 />
             </Route>
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
       )}
     </>
   );
