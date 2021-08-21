@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Login from "src/pages/Login";
 import Meetups from "src/pages/Meetups";
 import Meetup from "src/pages/Meetup";
@@ -27,7 +27,9 @@ export default function Routes() {
       {user.isUnknow() ? (
         <Loader />
       ) : (
-        <>
+        <BrowserRouter
+          basename={process.ENV === "production" && "/santandet-meetup"}
+        >
           <Switch>
             <Route exact path={"/"}>
               {loggedIn ? <Redirect to={ROUTER_PATHS.meetups} /> : <Login />}
@@ -76,7 +78,7 @@ export default function Routes() {
               <Error404 />
             </Route>
           </Switch>
-        </>
+        </BrowserRouter>
       )}
     </>
   );
