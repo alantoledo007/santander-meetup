@@ -32,9 +32,12 @@ export const getErrorMessage = (code) => {
   );
 };
 
-export const GETrequestWithRetries = (uri, tries) => {
+export const GETrequestWithRetries = (uri, tries, onError) => {
   return axios.get(uri).catch((error) => {
-    if (tries > 0) return GETrequestWithRetries(uri, tries - 1);
+    if (tries > 0) {
+      if (typeof onError === "function") onError(error);
+      return GETrequestWithRetries(uri, tries - 1, onError);
+    }
     return Promise.reject(error);
   });
 };
@@ -72,7 +75,9 @@ export const getRoundedHourFromMeetupDatetime = (datetime) => {
 };
 
 export const getHourFromWeatherDatetime = (datetime) => {
-  return parseInt(moment(datetime, "YYYY/MM/DD HH:mm:ss").format("HH"));
+  const hour = parseInt(moment(datetime, "YYYY/MM/DD HH:mm:ss").format("HH"));
+  if (hour === 0) return 24;
+  return hour;
 };
 
 export const getTempsOrderedByHourCloser = (refHour, tempsArray) => {
