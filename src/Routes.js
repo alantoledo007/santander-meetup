@@ -28,7 +28,9 @@ export default function Routes() {
         <Loader />
       ) : (
         <BrowserRouter
-          basename={process.ENV === "production" && "/santandet-meetup"}
+          basename={
+            process.env.NODE_ENV === "production" ? "/santander-meetup" : "/"
+          }
         >
           <Switch>
             <Route exact path={"/"}>
