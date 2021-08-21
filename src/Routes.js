@@ -27,11 +27,7 @@ export default function Routes() {
       {user.isUnknow() ? (
         <Loader />
       ) : (
-        <HashRouter
-          basename={
-            process.env.NODE_ENV === "production" ? "/santander-meetup" : "/"
-          }
-        >
+        <HashRouter>
           <Switch>
             <Route exact path={"/"}>
               {loggedIn ? <Redirect to={ROUTER_PATHS.meetups} /> : <Login />}
