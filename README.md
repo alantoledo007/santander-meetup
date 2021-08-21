@@ -34,6 +34,8 @@ La misma se conecta con firebase y los recursos están conectados en `real-time`
 
 Además, se conecta con `AppWeather` para consumir los datos meteorológicos necesarios para cumplir con el objetivo de la app.
 
+Como se pordrá notar, se utilizan la navegación por Hash, me vi obligado a utilizar dicha navegación debido a las limitaciones de deployar en github: https://create-react-app.dev/docs/deployment
+
 ## Features
 
 - Como usuario me puedo autenticar en la app.
@@ -47,7 +49,7 @@ Además, se conecta con `AppWeather` para consumir los datos meteorológicos nec
 - Notificar a usuarios y administradores el estado de las meetups.
 - Como administrador, poder cancelar meetups.
 
-## Reglas de oro
+## Regla de oro
 
 - Los usuarios tienen tiempo de registrarse hasta 24hs antes de la meetups. Permitiendo a los organizadores tener un margen de tiempo para comprar las birras necesarias.
 
@@ -68,6 +70,8 @@ Además, se conecta con `AppWeather` para consumir los datos meteorológicos nec
 - También está installado Cypress, pero no llegue a utilizarlo.
 
 # Detalles técnicos
+
+- El proyecto es una `PWA` podes agregarla al inicio desde el celular y se va a ejecutar como una aplicación más.
 
 - .env: Entiendo que el .env debe estar oculo, pero partiendo que es un chalenge, por cuestiones de practicidad decidi exponer el API_KEY de AppWeather para facilitar la prueba de la app.
 
