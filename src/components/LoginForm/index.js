@@ -33,7 +33,7 @@ export default function LoginForm({ login }) {
                 label="Correo electrónico"
                 error={!!errors.email?.message}
                 helperText={errors.email?.message}
-                {...register("email")}
+                inputRef={register}
               />
             </Box>
 
@@ -48,7 +48,7 @@ export default function LoginForm({ login }) {
                 label="Contraseña"
                 error={!!errors.password?.message}
                 helperText={errors.password?.message}
-                {...register("password")}
+                inputRef={register}
               />
             </Box>
 
